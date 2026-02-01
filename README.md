@@ -51,8 +51,27 @@ sudo systemctl enable clamav-daemon  # Auto-start on reboot
    - `MAX_FILE_SIZE` - Upload limit in bytes
 
 4. **Run the server:**
+
+   **Option A: Direct run (development)**
    ```bash
    uvicorn main:app --reload
+   ```
+
+   **Option B: Using PM2 (production)**
+   ```bash
+   npm install -g pm2
+   pm2 start ecosystem.config.js
+   pm2 save
+   pm2 startup
+   ```
+
+   Useful PM2 commands:
+   ```bash
+   pm2 status                    # Check app status
+   pm2 logs package-manager      # View logs
+   pm2 restart package-manager   # Restart app
+   pm2 stop package-manager      # Stop app
+   pm2 delete package-manager    # Remove from PM2
    ```
 
 Visit `http://localhost:8000/docs` to see the interactive API documentation.
